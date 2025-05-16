@@ -60,4 +60,5 @@ public class Produto {
     public void setDataFabricacao(LocalDate dataFabricacao) {
         this.dataFabricacao = dataFabricacao;
     }
+
 }
