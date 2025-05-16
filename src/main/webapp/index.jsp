@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>FiapStore</title>
+    <title>MONEY PANDA</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./resources/css/bootstrap.css">
 </head>
@@ -12,7 +12,7 @@
 <div class="container">
     <div class="mt-5 ms-5 me-5">
 
-        <h1>Bem vindo ao site!</h1>
+        <h1>Bem vindo ao Money Panda!</h1>
 
     </div>
 </div>

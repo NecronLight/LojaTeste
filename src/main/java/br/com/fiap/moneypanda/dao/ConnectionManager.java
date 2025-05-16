@@ -1,4 +1,4 @@
-package br.com.fiap.fiapstore.dao;
+package br.com.fiap.moneypanda.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

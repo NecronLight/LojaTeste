@@ -1,4 +1,4 @@
-package br.com.fiap.fiapstore.model;
+package br.com.fiap.moneypanda.model;
 
 public class Categoria {
 

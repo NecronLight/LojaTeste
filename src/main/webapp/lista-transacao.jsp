@@ -16,43 +16,43 @@
 
         <div class="card mb-3">
             <div class="card-header">
-                LISTA DE PRODUTOS
+                LISTA DE TRANSAÇÕES
             </div>
             <div class="card-body">
-                <h5 class="card-title">Gestão de produtos eficiente</h5>
-                <p class="card-text">Mantenha os dados dos seus produtos sempre atualizados e acessíveis.</p>
+                <h5 class="card-title">Gestão do seu Dinheiro</h5>
+                <p class="card-text">Mantenha os dados das suas transações sempre atualizadas.</p>
                 <table class="table table-striped table-bordered">
                     <thead>
                     <tr>
                         <th>Nome</th>
                         <th class="text-end">Quantidade</th>
                         <th class="text-end">Valor</th>
-                        <th class="text-center">Data de fabricação</th>
+                        <th class="text-center">Data da transação</th>
                         <th>Categoria</th>
                         <th class="text-center"></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${produtos}" var="produto">
+                    <c:forEach items="${transacoes}" var="transacao">
                     <tr>
-                        <td>${produto.nome}</td>
-                        <td class="text-end">${produto.valor}</td>
-                        <td class="text-end">${produto.quantidade}</td>
+                        <td>${transacao.nome}</td>
+                        <td class="text-end">${transacao.valor}</td>
+                        <td class="text-end">${transacao.quantidade}</td>
                         <td class="text-center">
                             <fmt:parseDate
-                                    value="${produto.dataFabricacao}"
+                                    value="${transacao.dataTransacao}"
                                     pattern="yyyy-MM-dd"
-                                    var="dataFabricacaoFmt"/>
+                                    var="dataTransacaoFmt"/>
 
                             <fmt:formatDate
-                                    value="${dataFabricacaoFmt}"
+                                    value="${dataTransacaoFmt}"
                                     pattern="dd/MM/yyyy"/>
                         </td>
-                        <td>${produto.categoria.nome}</td>
+                        <td>${transacao.categoria.nome}</td>
                         <td class="text-center">
-                            <c:url value="produtos" var="link">
+                            <c:url value="transacoes" var="link">
                                 <c:param name="acao" value="abrir-form-edicao"/>
-                                <c:param name="codigo" value="${produto.codigo}"/>
+                                <c:param name="codigo" value="${transacao.codigo}"/>
                             </c:url>
                             <a href="${link}" class="btn btn-primary">Editar</a>
 
@@ -61,7 +61,7 @@
                                 class="btn btn-danger"
                                 data-bs-toggle="modal"
                                 data-bs-target="#excluirModal"
-                                onclick="codigoExcluir.value = (${produto.codigo})"
+                                onclick="codigoExcluir.value = (${transacao.codigo})"
                             >
                                 Excluir
                             </button>
@@ -71,7 +71,7 @@
                     </c:forEach>
                     </tbody>
                 </table>
-                <a href="produtos?acao=abrir-form-cadastro" class="btn btn-primary">Adicionar produto</a>
+                <a href="transacoes?acao=abrir-form-cadastro" class="btn btn-primary">Adicionar transação</a>
             </div>
         </div>
     </div>
@@ -100,12 +100,12 @@
                 </button>
             </div>
             <div class="modal-body">
-                <h4>Você confirma a exclusão deste produto?</h4>
+                <h4>Você confirma a exclusão desta transação?</h4>
                 <p><strong>Atenção!</strong> Esta ação é irreversível.</p>
             </div>
             <div class="modal-footer">
 
-                <form action="produtos" method="post">
+                <form action="transacoes" method="post">
                     <input
                             type="hidden"
                             name="acao"

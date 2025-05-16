@@ -1,4 +1,4 @@
-package br.com.fiap.fiapstore;
+package br.com.fiap.moneypanda;
 
 import java.io.*;
 

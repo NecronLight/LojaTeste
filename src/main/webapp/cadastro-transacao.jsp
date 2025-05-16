@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Cadastro de produtos</title>
+    <title>Cadastro de transações</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./resources/css/bootstrap.css">
 </head>
@@ -13,7 +13,7 @@
     <div class="mt-5 ms-5 me-5">
         <div class="card mb-3">
             <div class="card-header">
-                CADASTRO DE PRODUTO
+                CADASTRO DE TRANSAÇÃO
             </div>
 
             <c:if test="${not empty mensagem}">
@@ -25,7 +25,7 @@
             </c:if>
 
             <div class="card-body">
-                <form action="produtos?acao=cadastrar" method="post">
+                <form action="transacoes?acao=cadastrar" method="post">
                     <div class="form-group">
                         <label for="id-nome">Nome</label>
                         <input type="text" name="nome" id="id-nome" class="form-control">
@@ -42,8 +42,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="id-fabricacao">Data de Fabricação</label>
-                        <input type="date" name="fabricacao" id="id-fabricacao" class="form-control">
+                        <label for="id-data-transacao">Data da Transação</label>
+                        <input type="date" name="dataTransacao" id="id-data-transacao" class="form-control">
                     </div>
 
                     <div class="form-group">

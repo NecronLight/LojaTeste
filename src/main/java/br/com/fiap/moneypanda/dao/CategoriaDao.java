@@ -1,6 +1,6 @@
-package br.com.fiap.fiapstore.dao;
+package br.com.fiap.moneypanda.dao;
 
-import br.com.fiap.fiapstore.model.Categoria;
+import br.com.fiap.moneypanda.model.Categoria;
 
 import java.util.List;
 

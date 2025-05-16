@@ -1,4 +1,4 @@
-package br.com.fiap.fiapstore.exception;
+package br.com.fiap.moneypanda.exception;
 
 public class DBException extends Exception {
 

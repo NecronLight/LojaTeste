@@ -1,11 +1,11 @@
-package br.com.fiap.fiapstore.controller;
+package br.com.fiap.moneypanda.controller;
 
-import br.com.fiap.fiapstore.dao.CategoriaDao;
-import br.com.fiap.fiapstore.dao.ProdutoDao;
-import br.com.fiap.fiapstore.exception.DBException;
-import br.com.fiap.fiapstore.factory.DaoFactory;
-import br.com.fiap.fiapstore.model.Categoria;
-import br.com.fiap.fiapstore.model.Produto;
+import br.com.fiap.moneypanda.dao.CategoriaDao;
+import br.com.fiap.moneypanda.dao.TransacaoDao;
+import br.com.fiap.moneypanda.exception.DBException;
+import br.com.fiap.moneypanda.factory.DaoFactory;
+import br.com.fiap.moneypanda.model.Categoria;
+import br.com.fiap.moneypanda.model.Transacao;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -17,15 +17,15 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
-@WebServlet("/produtos")
-public class ProdutoServlet extends HttpServlet {
+@WebServlet("/transacoes")
+public class TransacaoServlet extends HttpServlet {
 
-    private ProdutoDao dao;
+    private TransacaoDao dao;
     private CategoriaDao categoriaDao;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
-        dao = DaoFactory.getProdutoDao();
+        dao = DaoFactory.getTransacaoDao();
         categoriaDao = DaoFactory.getCategoriaDao();
     }
 
@@ -65,28 +65,28 @@ public class ProdutoServlet extends HttpServlet {
         String nome = req.getParameter("nome");
         double valor = Double.valueOf(req.getParameter("valor"));
         int quantidade = Integer.valueOf(req.getParameter("quantidade"));
-        LocalDate fabricacao = LocalDate.parse(req.getParameter("fabricacao"));
+        LocalDate dataTransacao = LocalDate.parse(req.getParameter("dataTransacao"));
         int codigoCategoria = Integer.parseInt(req.getParameter("categoria"));
 
         Categoria categoria = new Categoria();
         categoria.setCodigo(codigoCategoria);
 
-        Produto produto = new Produto (
+        Transacao transacao = new Transacao (
                 0,
                 nome,
                 valor,
                 quantidade,
-                fabricacao
+                dataTransacao
         );
 
-        produto.setCategoria(categoria);
+        transacao.setCategoria(categoria);
 
         try {
-            dao.cadastrar(produto);
-            req.setAttribute("mensagem", "Produto cadastrado com sucesso!");
+            dao.cadastrar(transacao);
+            req.setAttribute("mensagem", "Transação cadastrado com sucesso!");
         } catch (DBException e) {
             e.printStackTrace();
-            req.setAttribute("erro", "Erro ao cadastrar o produto");
+            req.setAttribute("erro", "Erro ao cadastrar a transação");
         }
 
         abrirFormCadastro(req, resp);
@@ -98,20 +98,20 @@ public class ProdutoServlet extends HttpServlet {
             String nome = req.getParameter("nome");
             double valor = Double.parseDouble(req.getParameter("valor"));
             int quantidade = Integer.parseInt(req.getParameter("quantidade"));
-            LocalDate fabricacao = LocalDate
-                    .parse(req.getParameter("fabricacao"));
+            LocalDate dataTransacao = LocalDate
+                    .parse(req.getParameter("dataTransacao"));
 
             int codigoCategoria = Integer.parseInt(req.getParameter("categoria"));
 
             Categoria categoria = new Categoria();
             categoria.setCodigo(codigoCategoria);
 
-            Produto produto = new Produto(codigo, nome, valor, quantidade, fabricacao);
-            produto.setCategoria(categoria);
+            Transacao transacao = new Transacao(codigo, nome, valor, quantidade, dataTransacao);
+            transacao.setCategoria(categoria);
 
-            dao.atualizar(produto);
+            dao.atualizar(transacao);
 
-            req.setAttribute("mensagem", "Produto atualizado!");
+                req.setAttribute("mensagem", "Transação atualizada!");
         } catch (DBException db) {
             db.printStackTrace();
             req.setAttribute("erro", "Erro ao atualizar");
@@ -145,25 +145,26 @@ public class ProdutoServlet extends HttpServlet {
     private void abrirFormCadastro(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         carregarOpcoesCategoria(req);
-        req.getRequestDispatcher("cadastro-produto.jsp").forward(req, resp);
+        req.getRequestDispatcher("cadastro-transacao.jsp").forward(req, resp);
     }
 
     private void carregarOpcoesCategoria(HttpServletRequest req) {
         List<Categoria> lista = categoriaDao.listar();
+        System.out.println("Número de categorias carregadas: " + lista.size()); // Adicione este log
         req.setAttribute("categorias", lista);
     }
 
     private void abrirForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("codigo"));
-        Produto produto = dao.buscar(id);
-        req.setAttribute("produto", produto);
+        Transacao transacao = dao.buscar(id);
+        req.setAttribute("transacao", transacao);
         carregarOpcoesCategoria(req);
-        req.getRequestDispatcher("editar-produto.jsp").forward(req, resp);
+        req.getRequestDispatcher("editar-transacao.jsp").forward(req, resp);
     }
 
     private void listar(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Produto> lista = dao.listar();
-        req.setAttribute("produtos", lista);
-        req.getRequestDispatcher("lista-produto.jsp").forward(req, resp);
+        List<Transacao> lista = dao.listar();
+        req.setAttribute("transacoes", lista);
+        req.getRequestDispatcher("lista-transacao.jsp").forward(req, resp);
     }
 }

@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Edição de produtos</title>
+    <title>Edição de Transações</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./resources/css/bootstrap.css">
 </head>
@@ -13,7 +13,7 @@
     <div class="mt-5 ms-5 me-5">
         <div class="card mb-3">
             <div class="card-header">
-                ATUALIZAR PRODUTO
+                ATUALIZAR TRANSAÇÃO
             </div>
 
             <c:if test="${not empty mensagem}">
@@ -25,29 +25,29 @@
             </c:if>
 
             <div class="card-body">
-                <form action="produtos?acao=editar" method="post">
+                <form action="transacoes?acao=editar" method="post">
 
-                    <input type="hidden" value="${produto.codigo}" name="codigo">
+                    <input type="hidden" value="${transacao.codigo}" name="codigo">
 
 
                     <div class="form-group">
                         <label for="id-nome">Nome</label>
-                        <input type="text" name="nome" id="id-nome" class="form-control" value="${produto.nome}">
+                        <input type="text" name="nome" id="id-nome" class="form-control" value="${transacao.nome}">
                     </div>
 
                     <div class="form-group">
                         <label for="id-valor">Valor</label>
-                        <input type="text" name="valor" id="id-valor" class="form-control" value="${produto.valor}">
+                        <input type="text" name="valor" id="id-valor" class="form-control" value="${transacao.valor}">
                     </div>
 
                     <div class="form-group">
                         <label for="id-quantidade">Quantidade</label>
-                        <input type="text" name="quantidade" id="id-quantidade" class="form-control" value="${produto.quantidade}">
+                        <input type="text" name="quantidade" id="id-quantidade" class="form-control" value="${transacao.quantidade}">
                     </div>
 
                     <div class="form-group">
-                        <label for="id-fabricacao">Data de Fabricação</label>
-                        <input type="date" name="fabricacao" id="id-fabricacao" class="form-control" value="${produto.dataFabricacao}">
+                        <label for="id-data-transacao">Data da Transação</label>
+                        <input type="date" name="data-transacao" id="id-data-transacao" class="form-control" value="${transacao.dataTransacao}">
                     </div>
 
                     <div class="form-group">

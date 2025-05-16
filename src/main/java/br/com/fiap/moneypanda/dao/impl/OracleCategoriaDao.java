@@ -1,8 +1,8 @@
-package br.com.fiap.fiapstore.dao.impl;
+package br.com.fiap.moneypanda.dao.impl;
 
-import br.com.fiap.fiapstore.dao.CategoriaDao;
-import br.com.fiap.fiapstore.dao.ConnectionManager;
-import br.com.fiap.fiapstore.model.Categoria;
+import br.com.fiap.moneypanda.dao.CategoriaDao;
+import br.com.fiap.moneypanda.dao.ConnectionManager;
+import br.com.fiap.moneypanda.model.Categoria;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
