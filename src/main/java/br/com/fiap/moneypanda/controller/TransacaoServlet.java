@@ -103,12 +103,6 @@ public class TransacaoServlet extends HttpServlet {
 
             int codigoCategoria = Integer.parseInt(req.getParameter("categoria"));
 
-            System.out.println("Código da Transação (Servlet - Editar): " + codigo);
-            System.out.println("Nome (Servlet - Editar): " + nome);
-            System.out.println("Valor (Servlet - Editar): " + valor);
-            System.out.println("Quantidade (Servlet - Editar): " + quantidade);
-            System.out.println("Data da Transação (Servlet - Editar): " + dataTransacao);
-            System.out.println("Código da Categoria (Servlet - Editar): " + codigoCategoria);
 
             Categoria categoria = new Categoria();
             categoria.setCodigo(codigoCategoria);
@@ -116,8 +110,6 @@ public class TransacaoServlet extends HttpServlet {
             Transacao transacao = new Transacao(codigo, nome, valor, quantidade, dataTransacao);
             transacao.setCategoria(categoria);
 
-            System.out.println("Código da Transação no Objeto (Servlet - Editar): " + transacao.getCodigo());
-            System.out.println("Categoria no Objeto (Servlet - Editar): " + transacao.getCategoria().getCodigo());
 
             dao.atualizar(transacao);
 
