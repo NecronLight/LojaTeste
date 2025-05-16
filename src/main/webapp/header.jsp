@@ -7,10 +7,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="#">Cadastro</a>
+          <a class="nav-link" aria-current="page" href="produtos?acao=abrir-form-cadastro">Cadastro</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Produtos</a>
+          <a class="nav-link" href="produtos?acao=listar">Produtos</a>
         </li>
       </ul>
       <form class="d-flex" role="search">

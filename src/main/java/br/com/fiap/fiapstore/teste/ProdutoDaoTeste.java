@@ -13,7 +13,7 @@ public class ProdutoDaoTeste {
     public static void main(String[] args) {
 
         // Cadastrar um produto
-        ProdutoDao dao = DaoFactory.getProdutoDAO();
+        ProdutoDao dao = DaoFactory.getProdutoDao();
 
         Produto produto = new Produto(
                 0,

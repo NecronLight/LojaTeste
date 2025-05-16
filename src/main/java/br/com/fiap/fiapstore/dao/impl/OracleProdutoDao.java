@@ -3,6 +3,7 @@ package br.com.fiap.fiapstore.dao.impl;
 import br.com.fiap.fiapstore.dao.ConnectionManager;
 import br.com.fiap.fiapstore.dao.ProdutoDao;
 import br.com.fiap.fiapstore.exception.DBException;
+import br.com.fiap.fiapstore.model.Categoria;
 import br.com.fiap.fiapstore.model.Produto;
 
 import java.sql.*;
@@ -23,8 +24,8 @@ public class OracleProdutoDao implements ProdutoDao {
 
         String sql = "INSERT INTO TB_PRODUTO " +
                 "(COD_PRODUTO, NOME_PRODUTO, VALOR_PRODUTO, " +
-                "QTDE_PRODUTO, DATA_FABRICACAO) " +
-                "VALUES (SQ_TB_PRODUTO.NEXTVAL, ?, ?, ?, ?)";
+                "QTDE_PRODUTO, DATA_FABRICACAO, COD_CATEGORIA) " +
+                "VALUES (SQ_TB_PRODUTO.NEXTVAL, ?, ?, ?, ?, ?)";
 
         try {
             stmt = conexao.prepareStatement(sql);
@@ -32,6 +33,7 @@ public class OracleProdutoDao implements ProdutoDao {
             stmt.setDouble(2, produto.getValor());
             stmt.setInt(3, produto.getQuantidade());
             stmt.setDate(4, Date.valueOf(produto.getDataFabricacao()));
+            stmt.setInt(5, produto.getCategoria().getCodigo());
             stmt.executeUpdate();
 
             System.out.println("Produto cadastrado com sucesso!");
@@ -61,7 +63,8 @@ public class OracleProdutoDao implements ProdutoDao {
                     "NOME_PRODUTO = ?, " +
                     "VALOR_PRODUTO = ?, " +
                     "QTDE_PRODUTO = ?, " +
-                    "DATA_FABRICACAO = ? " +
+                    "DATA_FABRICACAO = ?, " +
+                    "COD_CATEGORIA = ? " +
                     "WHERE COD_PRODUTO = ?";
 
             stmt = conexao.prepareStatement(sql);
@@ -69,7 +72,8 @@ public class OracleProdutoDao implements ProdutoDao {
             stmt.setDouble(2, produto.getValor());
             stmt.setInt(3, produto.getQuantidade());
             stmt.setDate(4, Date.valueOf(produto.getDataFabricacao()));
-            stmt.setInt(5, produto.getCodigo());
+            stmt.setInt(5, produto.getCategoria().getCodigo());
+            stmt.setInt(6, produto.getCodigo());
             stmt.executeUpdate();
 
             System.out.println("Produto atualizado com sucesso!");
@@ -116,7 +120,7 @@ public class OracleProdutoDao implements ProdutoDao {
     }
 
     @Override
-    public Produto buscar(int codigo) {
+    public Produto buscar(int id) {
 
         Produto produto = null;
         PreparedStatement stmt = null;
@@ -124,19 +128,28 @@ public class OracleProdutoDao implements ProdutoDao {
 
         try {
             conexao = ConnectionManager.getInstance().getConnection();
-            String sql = "SELECT * FROM TB_PRODUTO WHERE COD_PRODUTO = ?";
+            String sql = "SELECT * FROM TB_PRODUTO " +
+                    "INNER JOIN TB_CATEGORIA " +
+                    "ON TB_PRODUTO.COD_CATEGORIA = TB_CATEGORIA.COD_CATEGORIA " +
+                    "WHERE TB_PRODUTO.COD_PRODUTO = ?";
             stmt = conexao.prepareStatement(sql);
-            stmt.setInt(1, codigo);
+            stmt.setInt(1, id);
             rs = stmt.executeQuery();
 
             if (rs.next()){
-                int codigoRetornado = rs.getInt("COD_PRODUTO");
+                int codigo = rs.getInt("COD_PRODUTO");
                 String nome = rs.getString("NOME_PRODUTO");
                 double valor = rs.getDouble("VALOR_PRODUTO");
                 int qtd = rs.getInt("QTDE_PRODUTO");
                 LocalDate data = rs.getDate("DATA_FABRICACAO").toLocalDate();
+                int codigoCategoria = rs.getInt("COD_CATEGORIA");
+                String nomeCategoria = rs.getString("NOME_CATEGORIA");
 
-                produto = new Produto(codigoRetornado, nome, valor, qtd, data);
+                produto = new Produto(codigo, nome, valor, qtd, data);
+
+                Categoria categoria = new Categoria(codigoCategoria, nomeCategoria);
+
+                produto.setCategoria(categoria);
             }
 
         } catch (SQLException e) {
@@ -156,13 +169,15 @@ public class OracleProdutoDao implements ProdutoDao {
     @Override
     public List<Produto> listar() {
 
-        List<Produto> lista = new ArrayList<>();
+        List<Produto> lista = new ArrayList<Produto>();
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
         try {
             conexao = ConnectionManager.getInstance().getConnection();
-            String sql = "SELECT * FROM TB_PRODUTO";
+            String sql = "SELECT * FROM TB_PRODUTO " +
+                    "INNER JOIN TB_CATEGORIA " +
+                    "ON TB_PRODUTO.COD_CATEGORIA = TB_CATEGORIA.COD_CATEGORIA";
             stmt = conexao.prepareStatement(sql);
             rs = stmt.executeQuery();
 
@@ -175,14 +190,24 @@ public class OracleProdutoDao implements ProdutoDao {
                 java.sql.Date data = rs.getDate("DATA_FABRICACAO");
                 LocalDate dataFabricacao = rs.getDate("DATA_FABRICACAO")
                         .toLocalDate();
+                int codigoCategoria = rs.getInt("COD_CATEGORIA");
+                String nomeCategoria = rs.getString("NOME_CATEGORIA");
 
-                Produto produto = new Produto(codigo, nome, valor, qtd, dataFabricacao);
+                Produto produto = new Produto(
+                        codigo, nome, valor, qtd, dataFabricacao
+                );
+
+                Categoria categoria = new Categoria(
+                        codigoCategoria, nomeCategoria
+                );
+                produto.setCategoria(categoria);
+
                 lista.add(produto);
 
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
+        }finally {
             try {
                 stmt.close();
                 rs.close();
