@@ -47,7 +47,7 @@
 
                     <div class="form-group">
                         <label for="id-data-transacao">Data da Transação</label>
-                        <input type="date" name="data-transacao" id="id-data-transacao" class="form-control" value="${transacao.dataTransacao}">
+                        <input type="date" name="dataTransacao" id="id-data-transacao" class="form-control" value="${transacao.dataTransacao}">
                     </div>
 
                     <div class="form-group">
