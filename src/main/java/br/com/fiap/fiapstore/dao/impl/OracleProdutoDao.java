@@ -70,8 +70,10 @@ public class OracleProdutoDao implements ProdutoDao {
             stmt.setInt(3, produto.getQuantidade());
             stmt.setDate(4, Date.valueOf(produto.getDataFabricacao()));
             stmt.setInt(5, produto.getCodigo());
-
             stmt.executeUpdate();
+
+            System.out.println("Produto atualizado com sucesso!");
+
         } catch (SQLException e) {
             e.printStackTrace();
             throw new DBException("Erro ao atualizar.");
@@ -97,6 +99,8 @@ public class OracleProdutoDao implements ProdutoDao {
             stmt = conexao.prepareStatement(sql);
             stmt.setInt(1, codigo);
             stmt.executeUpdate();
+
+            System.out.println("Produto removido com sucesso!");
         } catch (SQLException e) {
             e.printStackTrace();
             throw new DBException("Erro ao remover.");
