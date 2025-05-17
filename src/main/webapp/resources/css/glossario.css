@@ -1,0 +1,32 @@
+body {
+    background-color: #f8f9fa;
+}
+.card {
+    margin-bottom: 20px;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    transition: box-shadow 0.3s ease-in-out; /* Adiciona uma transição suave para o efeito */
+}
+.card-header {
+    background-color: #e9ecef;
+    border-bottom: 1px solid #dee2e6;
+    padding: 10px 15px;
+    border-radius-top-left: 8px;
+    border-radius-top-right: 8px;
+    font-weight: bold;
+    color: #495057;
+}
+.card-body {
+    padding: 15px;
+    color: #6c757d;
+}
+.card-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+    color: #212529;
+}
+
+.card:hover {
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4); /* Define a sombra ao passar o mouse */
+}
