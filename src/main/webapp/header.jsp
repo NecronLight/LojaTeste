@@ -10,12 +10,19 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
         <li class="nav-item">
           <a class="nav-link" aria-current="page" href="transacoes?acao=abrir-form-cadastro">Cadastro</a>
         </li>
+
         <li class="nav-item">
           <a class="nav-link" href="transacoes?acao=listar">Transações</a>
         </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="glossario.jsp">Glossário</a>
+        </li>
+
       </ul>
 
       <c:if test="${empty user}">
