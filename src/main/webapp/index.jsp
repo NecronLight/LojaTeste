@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>MONEY PANDA</title>
+    <title>Money Panda - Página Inicial</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./resources/css/bootstrap.css">
 </head>

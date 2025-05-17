@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>FiapStore</title>
+    <title>Suas transações</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./resources/css/bootstrap.css">
 </head>
@@ -25,8 +25,8 @@
                     <thead>
                     <tr>
                         <th>Nome</th>
-                        <th class="text-end">Quantidade</th>
                         <th class="text-end">Valor</th>
+                        <th class="text-end">Quantidade</th>
                         <th class="text-center">Data da transação</th>
                         <th>Categoria</th>
                         <th class="text-center"></th>
