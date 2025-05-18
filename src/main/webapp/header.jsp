@@ -23,6 +23,10 @@
           <a class="nav-link" href="glossario.jsp">Glossário</a>
         </li>
 
+        <li class="nav-item">
+          <a class="nav-link" href="comparador-investimento.jsp">Comparativo investimentos</a>
+        </li>
+
       </ul>
 
       <c:if test="${empty user}">

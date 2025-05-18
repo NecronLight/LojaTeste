@@ -37,12 +37,12 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="id-quantidade">Quantidade</label>
+                        <label for="id-quantidade">Quantidade de cotas</label>
                         <input type="text" name="quantidade" id="id-quantidade" class="form-control">
                     </div>
 
                     <div class="form-group">
-                        <label for="id-data-transacao">Data da Transação</label>
+                        <label for="id-data-transacao">Data do Investimento</label>
                         <input type="date" name="dataTransacao" id="id-data-transacao" class="form-control">
                     </div>
 

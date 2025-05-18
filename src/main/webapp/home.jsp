@@ -7,6 +7,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./resources/css/bootstrap.css">
   <link rel="stylesheet" href="./resources/css/home.css">
+  <style>
+    .fixed-bottom-right {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #f8d7da; /* Cor de fundo vermelha clara */
+      color: #721c24; /* Cor do texto vermelha escura */
+      padding: 15px;
+      border: 1px solid #f5c6cb;
+      border-radius: 5px;
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+      z-index: 1000; /* Garante que a caixa fique acima de outros elementos */
+    }
+    .fixed-bottom-right strong {
+      font-weight: bold;
+    }
+  </style>
 </head>
 
 <body>
@@ -25,6 +42,13 @@
     </div>
   </c:if>
 </div>
+
+<div class="fixed-bottom-right">
+  <strong>Informação de Teste:</strong> Para testar as funcionalidades utilize esse Login: <br>
+  <strong>Email:</strong> moneypanda@gmail.com <br>
+  <strong>Senha:</strong> 123456
+</div>
+
 <%@include file="footer.jsp" %>
 <script src="resources/js/bootstrap.bundle.js"></script>
 </body>
